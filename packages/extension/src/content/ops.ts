@@ -18,6 +18,7 @@ export function makeOps(page: Page) {
     type: (a: { ref: string; text: string; clear: boolean; blockedSelectors: string[] }) =>
       page.type(a.ref, a.text, a.clear, a.blockedSelectors),
     select: (a: { ref: string; value: string; blockedSelectors: string[] }) => page.select(a.ref, a.value, a.blockedSelectors),
+    historyBack: () => page.historyBack(),
     pressKey: (a: { key: string; blockedSelectors: string[] }) => page.pressKey(a.key, a.blockedSelectors),
   };
 }

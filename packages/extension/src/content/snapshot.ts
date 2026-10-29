@@ -544,6 +544,16 @@ export class Page {
     return { found: true };
   }
 
+  /**
+   * chrome.tabs.goBack skips history entries that never had a user click, which is every entry in an
+   * agent tab, so it reports "no history". The page's own history.back() is not subject to that.
+   */
+  historyBack(): ActionResult {
+    if (this.win.history.length <= 1) return { status: "error", message: "there is no earlier page in this tab's history" };
+    this.win.history.back();
+    return { status: "ok" };
+  }
+
   /** Screenshots cannot be redacted after the fact, so blocked elements are hidden while capturing. */
   hideBlocked(blockedSelectors: string[]): { hidden: number } {
     this.sel = blockedSelectors;

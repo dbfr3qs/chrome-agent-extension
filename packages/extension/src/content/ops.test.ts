@@ -123,6 +123,15 @@ describe("ops use the argument shapes the background sends", () => {
     expect(call("restoreBlocked", undefined as never)).toEqual({ ok: true });
   });
 
+  it("historyBack reports an empty history, and goes back when there is one", async () => {
+    expect(call("historyBack", undefined as never)).toMatchObject({ status: "error", message: expect.stringContaining("no earlier page") });
+    history.pushState({}, "", "/second");
+    const popped = new Promise((r) => window.addEventListener("popstate", r, { once: true }));
+    expect(call("historyBack", undefined as never)).toEqual({ status: "ok" });
+    await popped;
+    expect(location.pathname).not.toBe("/second");
+  });
+
   it("waitFor takes the full options object", async () => {
     expect(await call("waitFor", { text: "link", timeoutMs: 300, blockedSelectors: BLOCKED })).toEqual({ found: true });
   });

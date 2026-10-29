@@ -103,6 +103,10 @@ export async function navigateTo(tabId: number, url: string, policy: Policy) {
 }
 
 export async function back(tabId: number, policy: Policy) {
-  await waitForNavigation(tabId, () => chrome.tabs.goBack(tabId));
+  const before = (await chrome.tabs.get(tabId)).url;
+  await waitForNavigation(tabId, async () => unwrap(await callPage<ActionResult>(tabId, "historyBack", null, policy)));
+  // history.length also counts forward entries, so "nothing happened" is the reliable sign there was no earlier page.
+  const after = await chrome.tabs.get(tabId).then((t) => t.url, () => undefined);
+  if (after !== undefined && after === before) throw new BridgeError("NOT_FOUND", "there is no earlier page in this tab's history");
   return snapshotAfterNavigation(tabId, policy);
 }
