@@ -1,0 +1,11 @@
+{
+  "name": "@bb/host",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc --noEmit -p . && node build.mjs",
+    "install-host": "node build.mjs && node dist/install.js"
+  },
+  "dependencies": { "@bb/protocol": "workspace:*" }
+}

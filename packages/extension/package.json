@@ -1,0 +1,11 @@
+{
+  "name": "@bb/extension",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc --noEmit -p . && node build.mjs"
+  },
+  "dependencies": { "@bb/protocol": "workspace:*", "zod": "^3.24.0" },
+  "devDependencies": { "@types/chrome": "^0.0.300" }
+}

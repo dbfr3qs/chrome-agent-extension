@@ -1,0 +1,9 @@
+{
+  "name": "@bb/cli",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "bin": { "bb": "dist/bb.js" },
+  "scripts": { "build": "tsc --noEmit -p . && node build.mjs && chmod +x dist/bb.js dist/injection-suite.js" },
+  "dependencies": { "@bb/protocol": "workspace:*", "@bb/client": "workspace:*" }
+}

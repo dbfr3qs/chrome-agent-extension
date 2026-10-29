@@ -1,0 +1,9 @@
+{
+  "name": "@bb/client",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": { "build": "tsc --noEmit -p ." },
+  "dependencies": { "@bb/protocol": "workspace:*" }
+}

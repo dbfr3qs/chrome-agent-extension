@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Browser Bridge",
+  "version": "0.0.1",
+  "description": "Local-only policy-gated browser bridge for coding agents.",
+  "minimum_chrome_version": "120",
+  "permissions": ["nativeMessaging", "tabs", "tabGroups", "scripting", "storage", "sidePanel", "webNavigation"],
+  "host_permissions": ["<all_urls>"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": { "default_title": "Browser Bridge (click to pause/resume)" },
+  "options_page": "options.html",
+  "side_panel": { "default_path": "sidepanel.html" }
+}

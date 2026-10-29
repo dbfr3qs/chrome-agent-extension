@@ -1,0 +1,24 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="color-scheme" content="light dark">
+<title>Browser Bridge</title>
+<style>
+  body { font: 13px system-ui; margin: 12px; }
+  h1 { font-size: 15px; margin: 0 0 4px; } h2 { font-size: 13px; margin: 18px 0 6px; }
+  h3 { font-size: 13px; margin: 0 0 6px; word-break: break-all; }
+  .muted { color: GrayText; }
+  .card { border: 2px solid #d29922; border-radius: 6px; padding: 10px; margin-bottom: 10px; }
+  .row { display: flex; gap: 8px; margin: 2px 0; } .k { min-width: 90px; color: GrayText; } .v { word-break: break-all; white-space: pre-wrap; }
+  .buttons { display: flex; gap: 8px; align-items: center; margin-top: 10px; }
+  button { padding: 6px 14px; font-size: 13px; cursor: pointer; }
+  .approve { background: #1a7f37; color: white; border: 0; border-radius: 4px; } .deny { background: #b00020; color: white; border: 0; border-radius: 4px; }
+  button:disabled { opacity: .4; cursor: default; }
+  .audit { font: 11px ui-monospace, monospace; padding: 2px 0; word-break: break-all; } .audit.deny { color: #b00020; } .audit.confirm { color: #9a6700; }
+</style>
+<h1>Browser Bridge</h1>
+<div id="state" class="muted"></div>
+<h2>Needs your approval</h2>
+<div id="pending"></div>
+<h2>Recent activity</h2>
+<div id="audit"></div>
+<script src="sidepanel.js"></script>

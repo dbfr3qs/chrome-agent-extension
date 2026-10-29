@@ -1,0 +1,23 @@
+# dependencies and build output
+node_modules/
+dist/
+*.tsbuildinfo
+coverage/
+
+# secrets and key material (the extension's private signing key lives here)
+*.pem
+*.key
+*.p12
+*.crt
+.env
+.env.*
+
+# local runtime data and logs (the real audit log lives in ~/.browser-bridge, outside the repo)
+*.log
+.browser-bridge/
+
+# editor / OS / local tool state
+.DS_Store
+.idea/
+.vscode/
+.claude/
