@@ -28,6 +28,22 @@ ln -s "$PWD/packages/cli/dist/bb.js" ~/.local/bin/bb    # optional: `bb` on your
 3. Open the extension's options page and add sites (below). With no sites, everything is denied.
 4. After rebuilding, **reload the extension** at `chrome://extensions`. Rerun `pnpm host:install` if you change Node versions (the launcher pins an absolute `node`).
 
+**The extension ID and signing key.** A fresh clone needs no key generation. The manifest's `key` field comes from the committed `packages/extension/keys/public-key.txt`, which pins the ID (recorded in `keys/extension-id.txt`); the host installer reads that file to restrict which extension may launch the native host. Nothing in the build reads a private key, so `keys/extension.pem` (gitignored) is not needed to build, load or run, only if you ever pack a `.crx`. Back it up if you care about that; it can't be recreated.
+
+Only if you want a **different ID** (a fork, or a second install that must not share one), regenerate the pair and rebuild:
+
+```sh
+cd packages/extension/keys
+openssl genrsa -out extension.pem 2048
+openssl rsa -in extension.pem -pubout -outform DER > pub.der
+base64 < pub.der | tr -d '\n' > public-key.txt
+shasum -a 256 pub.der | cut -c1-32 | tr '0-9a-f' 'a-p' > extension-id.txt   # Linux: sha256sum
+rm pub.der
+cd ../../.. && pnpm build && pnpm host:install
+```
+
+Then reload the extension and use the ID from `keys/extension-id.txt` wherever this README shows `hlmckamnikhalaijbocbikfadoogehak`. Never commit `extension.pem`.
+
 Claude Code (MCP):
 
 ```sh
